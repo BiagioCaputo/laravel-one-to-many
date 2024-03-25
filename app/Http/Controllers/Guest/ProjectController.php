@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Models\Type;
 
 class ProjectController extends Controller
 {
@@ -14,7 +15,9 @@ class ProjectController extends Controller
 
         if(!$project) abort(404);
 
-        return view('guest.projects.show', compact('project'));
+        $types = Type::all();
+
+        return view('guest.projects.show', compact('project', 'types'));
     }
 
 }

@@ -17,6 +17,13 @@
                     @endif
                     <div class="card-body">
                     <h5 class="card-title">{{$project->title}}</h5>
+                    <div class="my-2">
+                        @if($project->type)
+                            <span class="badge" style="background-color: {{$project->type->color}}">{{$project->type->label}}</span>
+                        @else 
+                            <span class="text-danger"><b>Nessun tipo selezionato</b></span>
+                        @endif
+                    </div>
                     <p class="card-text">{{$project->description}}</p>
                     </div>
                 </div>

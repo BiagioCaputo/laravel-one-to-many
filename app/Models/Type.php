@@ -9,6 +9,8 @@ class Type extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['label', 'color'];
+
     //funzione per cambiare il format delle date
     public function getFormattedDate($column, $format = 'd-m-Y')
     {

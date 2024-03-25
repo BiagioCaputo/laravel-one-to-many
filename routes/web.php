@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Guest\HomeController as GuestHomeController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Guest\ProjectController as GuestProjectController;
+use App\Http\Controllers\Admin\TypeController;
 
 
 
@@ -48,8 +49,11 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function(){
     Route::patch('/projects/{project}/restore', [AdminProjectController::class, 'restore'])->name('projects.restore')->withTrashed();
     Route::delete('/projects/{project}/drop', [AdminProjectController::class, 'drop'])->name('projects.drop')->withTrashed();
 
-    //Rotte admin Post
+    //Rotte resource admin/Projects
     Route::resource('projects', AdminProjectcontroller::class)->withTrashed(['show', 'edit', 'update']); 
+
+    //Rotte resource Admin/Types
+    Route::resource('/types', TypeController::class);
 });
  
 

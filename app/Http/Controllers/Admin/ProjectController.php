@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
@@ -29,7 +30,10 @@ class ProjectController extends Controller
             $query->whereIsCompleted($value);
         }
         $projects = $query->paginate(10)->withQueryString();
-        return view('admin.projects.index', compact('projects', 'filter'));
+
+        $types = Type::select('label', 'id')->get();
+
+        return view('admin.projects.index', compact('projects','filter', 'types'));
     }
 
     /**
@@ -38,7 +42,9 @@ class ProjectController extends Controller
     public function create()
     {
         $project = new Project();
-        return view('admin.projects.create', compact('project'));
+        $types = Type::select('label', 'id')->get();
+
+        return view('admin.projects.create', compact('project', 'types'));
     }
 
     /**

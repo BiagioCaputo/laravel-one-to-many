@@ -33,6 +33,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Slug</th>
+                <th scope="col">Tipo</th>
                 <th scope="col">Creato il</th>
                 <th scope="col">Ultima modifica</th>
                 <th scope="col">Completato</th>
@@ -50,6 +51,14 @@
                 <th scope="row">{{ $project->id}}</th>
                 <td>{{ $project->title}}</td>
                 <td>{{ $project->slug}}</td>
+                <td>
+                    @if($project->type)
+                        <span class="badge" style="background-color: {{$project->type->color}}">{{$project->type->label}}</span>
+                    @else 
+                        -
+                    @endif
+                </td>
+                </td>
                 <td>{{ $project->getFormattedDate('created_at')}}</td>
                 <td>{{ $project->getFormattedDate('updated_at')}}</td>
                 <td class="ps-4">{!! $project->completeIcon() !!}</td>
@@ -67,7 +76,7 @@
               </tr>
             @empty
               <tr>
-                <td colspan="6">
+                <td colspan="8">
                     <h2 class="text-center">Nessun progetto realizzato</h2>
                 </td>
               </tr> 

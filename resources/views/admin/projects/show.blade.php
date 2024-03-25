@@ -14,6 +14,13 @@
 </header>
 <main>
     <div class="container py-5">
+        <div class="my-2">
+            @if($project->type)
+                <span class="badge" style="background-color: {{$project->type->color}}">{{$project->type->label}}</span>
+            @else 
+                <span class="text-danger"><b>Nessun tipo selezionato</b></span>
+            @endif
+        </div>
         <div class="clearfix">
             @if ($project->image)
                 <img src="{{ $project->printImage() }}" alt="{{$project->title}}" class="me-2 float-start">

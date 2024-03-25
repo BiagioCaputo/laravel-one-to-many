@@ -10,15 +10,21 @@
 <header class="mb-4 mt-5">
   <div class="container d-flex justify-content-between align-items-center">
     <h1 class="">Progetti realizzati</h1>
-    <div class="col-2">
+    <div class="col-4">
       <form action="{{route('admin.projects.index')}}" method="GET">
         <div class="input-group">
-          <select class="form-select" name="filter">
+          <select class="form-select" name="is_completed_filter">
             <option value="">Tutti</option>
-            <option value="completed" @if($filter === 'completed') selected @endif>Completati</option>
-            <option value="uncompleted" @if($filter === 'uncompleted') selected @endif>In corso</option>
+            <option value="completed" @if($is_completed_filter === 'completed') selected @endif>Completati</option>
+            <option value="uncompleted" @if($is_completed_filter === 'uncompleted') selected @endif>In corso</option>
           </select>
-          <button class="btn btn-outline-secondary">Cerca</button>
+          <select class="form-select" name="type_filter">
+            <option value="">Tutti</option>
+            @foreach($types as $type)
+            <option value={{ $type->id }} @if($type_filter == $type->id) selected @endif>{{ $type->label }}</option>
+            @endforeach
+          </select>
+          <button class="btn btn-outline-secondary">Filtra</button>
         </div>
       </form>
     </div>

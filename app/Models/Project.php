@@ -12,7 +12,7 @@ class Project extends Model
     use HasFactory;
     use SoftDeletes;
     
-    protected $fillable =['title', 'description', 'image','slug','is_completed'];
+    protected $fillable =['title', 'description', 'image','slug','is_completed', 'type_id'];
 
 
     //funzione per cambiare il format delle date

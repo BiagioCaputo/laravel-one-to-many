@@ -36,23 +36,21 @@
                 @enderror
             </div>
         </div>
-        {{--<div class="col-7">
-            <div class="mb-5">
-                <label for="image" class="form-label">Immagine</label>
-                <input class="form-control @error('image') is-invalid @elseif(old('image', '')) is-valid @enderror" id="image" name="image"  placeholder="http:// o https://" value="{{old('image', $project->image)}}">
-                @error('image')
+        <div class="col-5">
+            <label for="type_id" class="form-label">Tipo</label>
+            <select class="form-select @error('type_id') is-invalid @elseif(old('type_id', '')) is-valid @enderror" name="type_id">
+                <option value="" @if(old('type_id', $project->type?->id) == '') selected @endif>Nessun tipo</option>
+                @foreach ($types as $type)
+                <option value="{{$type->id}}" @if(old('type_id', $project->type?->id) == $type->id) selected @endif>{{$type->label}}</option>
+                @endforeach
+            </select>
+            @error('type_id')
                 <div class="invalid-feedback">
-                    {{$message}}
+                    {{ $message }}
                 </div>
-                @enderror
-            </div>
+            @enderror
         </div>
-        <div class="col-1">
-            <div class="mb-5">
-                <img src="https://marcolanci.it/boolean/assets/placeholder.png" class="img-fluid" alt="img-post" id="preview">
-            </div>
-        </div>--}}
-        <div class="col-7">
+        <div class="col-6">
             <div class="mb-5">
                 <label for="image" class="form-label">Immagine</label>
 

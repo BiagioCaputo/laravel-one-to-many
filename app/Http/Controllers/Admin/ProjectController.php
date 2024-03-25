@@ -56,11 +56,13 @@ class ProjectController extends Controller
             'title' => 'required|string|unique:projects',
             'description' => 'required|string',
             'image' => 'nullable|image',
+            'type_id' => 'nullable|exists:types,id',
         ], 
         [
             'title.required' => 'Il progetto deve avere un titolo',
             'description.required' => 'Il progetto deve avere una descrizione',
             'image.image' => 'Il file inserito non è un immagine',
+            'type_id.exist' => 'Il tipo non è valido o esistente',
         ]);
 
         $data = $request->all();
@@ -92,7 +94,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('admin.projects.show', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.show', compact('project', 'types'));
     }
 
     /**
@@ -100,7 +103,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.edit', compact('project','types'));
     }
 
     /**
@@ -112,11 +116,13 @@ class ProjectController extends Controller
             'title' => ['required', 'string', Rule::unique('projects')->ignore($project->id)],
             'description' => 'required|string',
             'image' => 'nullable|image',
+            'type_id' => 'nullable|exists:types,id',
         ], 
         [
             'title.required' => 'Il progetto deve avere un titolo',
             'description.required' => 'Il progetto deve avere una descrizione',
             'image.image' => 'Il file inserito non è un immagine',
+            'type_id.exist' => 'Il tipo non è valido o esistente',
         ]);
     
         $data = $request->all();
